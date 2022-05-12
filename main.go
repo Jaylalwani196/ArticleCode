@@ -33,7 +33,7 @@ func returnAllArticles(w http.ResponseWriter, r *http.Request) {
 func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	key := vars["id"]
-
+	fmt.Println("Endpoint hit: get an article")
 	for _, article := range Articles {
 		if article.Id == key {
 			json.NewEncoder(w).Encode(article)
@@ -43,7 +43,7 @@ func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
 
 func createNewArticle(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
-	fmt.Println("Endpoint hit : /article-to create")
+	fmt.Println("Endpoint hit : Create new Article")
 	var article Article
 	json.Unmarshal(reqBody, &article)
 	Articles = append(Articles, article)
@@ -54,7 +54,7 @@ func createNewArticle(w http.ResponseWriter, r *http.Request) {
 func deleteArticle(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-
+	fmt.Println("Endpoint hit : Delete an article")
 	for index, article := range Articles {
 		if article.Id == id {
 			Articles = append(Articles[:index], Articles[index+1:]...)
